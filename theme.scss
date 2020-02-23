@@ -1,0 +1,20 @@
+$theme-colors: ("primary": #41b883,
+  "success" : #09ff00);
+
+
+$body-color : #36454F;
+
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+@import 'node_modules/vue2-timepicker/dist/VueTimepicker.css';
+
+.white-space-normal {
+  white-space: normal;
+}
+
+
+.big-badge {
+  padding: $spacer * .5;
+  margin-top: $spacer * .5;
+  margin-bottom: $spacer * .5;
+}
