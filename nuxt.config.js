@@ -19,8 +19,14 @@ export default {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || ''
-      }
+      },
+
     ],
+    script: [{
+      async: true,
+      "data-ad-client": "ca-pub-7900356772974418",
+      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+    }],
     link: [{
       rel: 'icon',
       type: 'image/x-icon',
