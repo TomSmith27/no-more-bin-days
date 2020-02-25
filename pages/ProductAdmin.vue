@@ -5,6 +5,7 @@
     <div class="container">
       <transition-group name="list">
         <div v-for="product in products" :key="product.name" class="input-group mb-3">
+          <b-form-select v-model="product.category" :options="categories"></b-form-select>
           <input v-model="product.name" type="text" class="form-control" />
           <div class="input-group-append">
             <button class="btn btn-outline-primary" type="button" @click="updateProduct(product)">Update</button>
@@ -13,6 +14,7 @@
         </div>
       </transition-group>
       <div class="input-group mb-3">
+        <b-form-select v-model="newProduct.category" :options="categories"></b-form-select>
         <input v-model="newProduct.name" type="text" class="form-control" />
         <div class="input-group-append">
           <button class="btn btn-primary" type="button" :disabled="newProduct.name.length == 0" @click="addProduct">Add</button>
@@ -36,10 +38,38 @@ export default defineComponent({
 
     const { orderedProducts, products } = useProducts()
 
+
+    const categories = [{
+      value: null,
+      text: 'Unknown'
+    },
+    {
+      value: 'Dental',
+      text: 'Dental'
+    },
+    {
+      value: 'Pet',
+      text: 'Pet'
+    },
+    {
+      value: 'Food',
+      text: 'Food'
+    },
+    {
+      value: 'Beauty',
+      text: 'Beauty'
+    },
+    {
+      value: 'Optical',
+      text: 'Optical'
+    }
+    ]
+
+
     function updateProduct(product: Product) {
       productsService.productsCollection
         .doc(product.id)
-        .update({ name: product.name })
+        .update({ name: product.name, category: product.category })
       products.value = [...orderedProducts.value]
     }
 
@@ -53,7 +83,8 @@ export default defineComponent({
     }
 
     const newProduct = ref<Product>({
-      name: ''
+      name: '',
+      category: null
     })
 
     async function addProduct() {
@@ -65,11 +96,12 @@ export default defineComponent({
         products.value.push({ id: addedProduct.id, ...newProduct.value })
         newProduct.value.name = ''
       } catch (err) {
+        alert(err)
         console.log(err)
       }
     }
 
-    return { newProduct, updateProduct, deleteProduct, addProduct, products }
+    return { newProduct, updateProduct, deleteProduct, addProduct, products, categories }
   }
 })
 </script>

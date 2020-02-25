@@ -10,7 +10,8 @@ export default class ProductsService {
 	}
 	async getProducts(): Promise<Product[]> {
 		return (await this.productsCollection.get()).docs.map((d) => {
-			return { id: d.id, name: d.data().name };
+			const data = d.data();
+			return { id: d.id, name: data.name, category: data.category ?? null };
 		});
 	}
 }
