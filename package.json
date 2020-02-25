@@ -1,6 +1,6 @@
 {
   "name": "no-more-bin-days",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "My polished Nuxt.js project",
   "author": "TSmith",
   "private": true,
@@ -11,7 +11,6 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "deploy": "npm run build && firebase deploy"
-
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
