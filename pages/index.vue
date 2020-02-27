@@ -75,70 +75,79 @@
 
 <script lang="ts">
 // @ is an alias to /src
-import ShopStatus from '@/components/ShopStatus.vue';
-import db from '@/firebase/firebase';
-import Vue from 'vue';
-import {
-  defineComponent,
-  ref,
-  computed,
-  onMounted
-} from '@vue/composition-api';
-import { DocumentData } from '@firebase/firestore-types';
-import ProductsService from '@/features/products/productsService';
-import ShopsService from '../services/shopsService';
-import { Shop } from '../features/shops/Shop';
-import { Product } from '@/features/products/Product';
-import { useProducts } from '@/features/products/useProducts'
-import ProductBadges from "@/components/ProductBadges.vue";
-export default defineComponent({
+import ShopStatus from '@/components/ShopStatus.vue'
+import Vue from 'vue'
+import ProductsService from '@/features/products/productsService'
+import ShopsService from '../services/shopsService'
+import { Shop } from '../features/shops/Shop'
+import { Product } from '@/features/products/Product'
+import ProductBadges from '@/components/ProductBadges.vue'
+
+const productService = new ProductsService()
+const shopsService = new ShopsService()
+export default Vue.extend({
   components: {
     ShopStatus,
     ProductBadges
   },
-  setup(props, context) {
-    const productService = new ProductsService();
-    const shopsService = new ShopsService();
-
-    let { orderedProducts, products } = useProducts()
-    let selectedProduct = ref<string>(null);
-
-    var routeProduct = context.root.$router.currentRoute.query["product"];
-    if (routeProduct != undefined && routeProduct != null) {
-      selectedProduct.value = routeProduct as string;
+  data() {
+    return {
+      isLoading: true,
+      products: [] as Product[],
+      shops: [] as Shop[],
+      selectedProduct: null as String | null
     }
+  },
+  async mounted() {
+    this.isLoading = true
 
-    let shops = ref<Shop[]>([]);
-    let isLoading = ref(true)
-    onMounted(async () => {
-      isLoading.value = true;
-      products.value = await productService.getProducts();
-      shops.value = await shopsService.get();
-      isLoading.value = false;
-    });
+    this.products = await productService.getProducts()
+    this.shops = await shopsService.get()
+    this.isLoading = false
 
-    const filteredShops = computed(() => {
-      if (selectedProduct.value != null) {
-        return shops.value
-          .sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
-          .filter(s =>
+    var routeProduct = this.$router.currentRoute.query['product']
+    if (routeProduct != undefined && routeProduct != null) {
+      this.selectedProduct = routeProduct as string
+    }
+  },
+  computed: {
+    orderedProducts(): Product[] {
+      return this.products.sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+      )
+    },
+    groupedProducts(): object {
+      return this.orderedProducts.reduce((r: any, e: Product) => {
+        // get first letter of name of current element
+        const group = e.name[0]
+        // if there is no property in accumulator with this letter create it
+        if (!r[group]) r[group] = { group, products: [e] }
+        // if there is push current element to children array for that letter
+        else r[group].products.push(e)
+        // return accumulator
+        return r
+      }, {})
+    },
+    filteredShops(): Shop[] {
+      if (this.selectedProduct != null) {
+        return this.shops
+          .sort((a, b) => (a.name > b.name ? 1 : -1))
+          .filter((s) =>
             s.products.some(
               (i: string) =>
-                i.toLowerCase() ==
-                selectedProduct.value!.toLowerCase()
+                i.toLowerCase() == this.selectedProduct!.toLowerCase()
             )
-          );
+          )
       }
-      return [];
-    });
-
-    let mapUrl = (shop: Shop) => {
-      return `http://maps.google.com/?q=${shop.address}`;
+      return []
     }
-
-    return { orderedProducts, selectedProduct, filteredShops, mapUrl, isLoading };
+  },
+  methods: {
+    mapUrl(shop: Shop) {
+      return `http://maps.google.com/?q=${shop.address}`
+    }
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>
