@@ -21,18 +21,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, computed } from '@vue/composition-api'
 import ProductsService from '@/features/products/productsService'
 import { Product } from '@/features/products/Product'
-import { useProducts } from '@/features/products/useProducts'
-export default defineComponent({
+import Vue from 'vue'
+const productService = new ProductsService()
+export default Vue.extend({
   name: 'Products',
-  components: {},
-  setup() {
-    const { orderedProducts, products } = useProducts()
-
-    const groupedProducts = computed(() => {
-      return orderedProducts.value.reduce((r: any, e: Product) => {
+  data() {
+    return {
+      products: [] as Product[]
+    }
+  },
+  async mounted() {
+    this.products = await productService.getProducts()
+  },
+  computed: {
+    orderedProducts(): Product[] {
+      return this.products.sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+      )
+    },
+    groupedProducts(): object {
+      return this.orderedProducts.reduce((r: any, e: Product) => {
         // get first letter of name of current element
         const group = e.name[0]
         // if there is no property in accumulator with this letter create it
@@ -42,9 +52,7 @@ export default defineComponent({
         // return accumulator
         return r
       }, {})
-    })
-
-    return { orderedProducts, groupedProducts }
+    }
   }
 })
 </script>
