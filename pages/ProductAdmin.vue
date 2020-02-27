@@ -4,7 +4,7 @@
 
     <div class="container">
       <transition-group name="list">
-        <div v-for="product in products" :key="product.name" class="input-group mb-3">
+        <div v-for="product in products" :key="product.id" class="input-group mb-3">
           <b-form-select v-model="product.category" :options="categories"></b-form-select>
           <input v-model="product.name" type="text" class="form-control" />
           <div class="input-group-append">
@@ -33,7 +33,7 @@ import { useProducts } from '@/features/products/useProducts'
 import firebase from '@/firebase/firebase'
 export default defineComponent({
   components: {},
-  setup() {
+  setup(props, context) {
     const productsService = new ProductsService()
 
     const { orderedProducts, products } = useProducts()
@@ -71,12 +71,14 @@ export default defineComponent({
         .doc(product.id)
         .update({ name: product.name, category: product.category })
       products.value = [...orderedProducts.value]
+      context.root.$store.dispatch('loadData')
     }
 
     async function deleteProduct(product: Product) {
       try {
         await productsService.productsCollection.doc(product.id).delete()
         products.value = products.value.filter((p) => p.id != product.id)
+
       } catch (err) {
         console.error(err)
       }

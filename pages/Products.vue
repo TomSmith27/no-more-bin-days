@@ -21,37 +21,14 @@
 </template>
 
 <script lang="ts">
-import ProductsService from '@/features/products/productsService'
 import { Product } from '@/features/products/Product'
 import Vue from 'vue'
-const productService = new ProductsService()
+import { RootState, getters } from '../store'
 export default Vue.extend({
   name: 'Products',
-  data() {
-    return {
-      products: [] as Product[]
-    }
-  },
-  async mounted() {
-    this.products = await productService.getProducts()
-  },
   computed: {
-    orderedProducts(): Product[] {
-      return this.products.sort((a, b) =>
-        a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-      )
-    },
     groupedProducts(): object {
-      return this.orderedProducts.reduce((r: any, e: Product) => {
-        // get first letter of name of current element
-        const group = e.name[0]
-        // if there is no property in accumulator with this letter create it
-        if (!r[group]) r[group] = { group, products: [e] }
-        // if there is push current element to children array for that letter
-        else r[group].products.push(e)
-        // return accumulator
-        return r
-      }, {})
+      return this.$store.getters.groupedProducts
     }
   }
 })

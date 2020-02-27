@@ -1,7 +1,8 @@
 export default {
   mode: 'universal',
   generate: {
-    fallback: true
+    fallback: true,
+    subFolders: true
   },
   /*
    ** Headers of the page

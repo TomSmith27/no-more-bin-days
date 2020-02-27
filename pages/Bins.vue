@@ -23,7 +23,7 @@
 </template>
 
 <style lang="scss" scoped>
-image {
+img {
   max-width: 100%;
 }
 </style>
