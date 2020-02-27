@@ -3,71 +3,65 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api';
-import { Shop } from '@/features/shops/Shop';
-export default defineComponent({
+import { Shop } from '@/features/shops/Shop'
+import Vue from 'vue'
+export default Vue.extend({
   name: 'shop-status',
-  components: {
-  },
+  components: {},
   props: {
     shop: {
       type: Object as () => Shop,
       required: true
     }
   },
-  setup(props) {
-
-    const isOpen = computed(() => {
-      if (props.shop.is247) {
-        return true;
-      }
-      else {
-        let currentDayOfWeek = new Date().getDay() - 1;
+  computed: {
+    isOpen(): boolean {
+      if (this.shop.is247) {
+        return true
+      } else {
+        let currentDayOfWeek = new Date().getDay() - 1
         if (currentDayOfWeek == -1) {
-          currentDayOfWeek = 6;
+          currentDayOfWeek = 6
         }
-        let openingTimes = props.shop.openingTimes[currentDayOfWeek];
+        let openingTimes = this.shop.openingTimes[currentDayOfWeek]
 
         if (openingTimes.isClosed) {
-          return false;
+          return false
         }
 
-        let currentD = new Date();
-        let openTime = new Date();
-        let openinTimeParts = openingTimes.from.split(':');
+        let currentD = new Date()
+        let openTime = new Date()
+        let openinTimeParts = openingTimes.from.split(':')
 
-        openTime.setHours(Number.parseInt(openinTimeParts[0]), Number.parseInt(openinTimeParts[1]), 0);
+        openTime.setHours(
+          Number.parseInt(openinTimeParts[0]),
+          Number.parseInt(openinTimeParts[1]),
+          0
+        )
 
-        let closeTime = new Date();
-        let closeTimeParts = openingTimes.to.split(':');
+        let closeTime = new Date()
+        let closeTimeParts = openingTimes.to.split(':')
         if (closeTimeParts[0] == '00' && closeTimeParts[1] == '00') {
           closeTimeParts[0] = '23'
           closeTimeParts[1] = '59'
         }
-        closeTime.setHours(Number.parseInt(closeTimeParts[0]), Number.parseInt(closeTimeParts[1]), 0);
-        if (currentD > openTime && currentD < closeTime) {
-          return true;
-        }
-        else {
-          return false;
-        }
-
+        closeTime.setHours(
+          Number.parseInt(closeTimeParts[0]),
+          Number.parseInt(closeTimeParts[1]),
+          0
+        )
+        return currentD > openTime && currentD < closeTime
       }
-    })
-
-    const status = computed(() => {
-      if (isOpen.value) {
+    },
+    status() {
+      if (this.isOpen) {
         return { variant: 'primary', text: 'Open' }
       }
 
       return { variant: 'danger', text: 'Closed' }
-    })
-
-
-    return { status }
-
+    }
   }
-});
+})
 </script>
 
 <style>

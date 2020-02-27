@@ -38,30 +38,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from '@vue/composition-api'
 import { Shop } from '@/features/shops/Shop'
 import ShopsService from '@/services/shopsService'
 import ProductBadges from '@/components/ProductBadges.vue'
-export default defineComponent({
+import Vue from 'vue'
+const shopService = new ShopsService()
+export default Vue.extend({
   components: {
     ProductBadges
   },
-  setup() {
-    const shopService = new ShopsService()
-
-    const shops = ref<Shop[]>([])
-    onMounted(async () => (shops.value = await shopService.get()))
-
-    const fields = [
-      { key: 'name', sortable: true },
-      { key: 'address', sortable: true },
-      { key: 'products', sortable: true },
-      { key: 'openingTimes', sortable: false }
-    ]
-    const sortBy = ref('name')
-    const sortDesc = ref(false)
-
-    return { shops, fields, sortBy, sortDesc }
+  async mounted() {
+    this.shops = await shopService.get()
+  },
+  data() {
+    return {
+      shops: [] as Shop[],
+      sortBy: 'name',
+      sortDesc: false
+    }
+  },
+  computed: {
+    fields() {
+      return [
+        { key: 'name', sortable: true },
+        { key: 'address', sortable: true },
+        { key: 'products', sortable: true },
+        { key: 'openingTimes', sortable: false }
+      ]
+    }
   }
 })
 </script>

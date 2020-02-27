@@ -26,35 +26,40 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted } from '@vue/composition-api'
 import ShopsService from '../services/shopsService'
 import { Shop } from '../features/shops/Shop'
 import ProductsService from '@/features/products/productsService'
-export default defineComponent({
+import Vue from 'vue'
+const shopService = new ShopsService()
+export default Vue.extend({
   components: {},
-  setup(props, context) {
-    const shopService = new ShopsService()
-
-    const shops = ref<Shop[]>([])
-    onMounted(async () => (shops.value = await shopService.get()))
-
-    const fields = [
-      { key: 'name', sortable: true },
-      { key: 'address', sortable: true },
-      { key: 'products', sortable: true },
-
-      'edit',
-      'delete'
-    ]
-    const sortBy = ref('name')
-    const sortDesc = ref(false)
-
-    async function deleteShop(id: string) {
-      await shopService.delete(id)
-      shops.value = shops.value.filter((f: any) => f.id != id)
+  async mounted() {
+    this.shops = await shopService.get()
+  },
+  data() {
+    return {
+      shops: [] as Shop[],
+      sortBy: 'name',
+      sortDesc: false
     }
+  },
+  computed: {
+    fields() {
+      return [
+        { key: 'name', sortable: true },
+        { key: 'address', sortable: true },
+        { key: 'products', sortable: true },
 
-    return { shops, deleteShop, fields, sortBy, sortDesc }
+        'edit',
+        'delete'
+      ]
+    }
+  },
+  methods: {
+    async deleteShop(id: string) {
+      await shopService.delete(id)
+      this.shops = this.shops.filter((f) => f.id != id)
+    }
   }
 })
 </script>

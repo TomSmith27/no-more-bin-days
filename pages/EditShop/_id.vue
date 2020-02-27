@@ -13,40 +13,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from '@vue/composition-api';
 import ShopForm from '@/components/shop-form.vue'
-import ShopsService from '@/services/shopsService';
-import { Shop } from '@/features/shops/Shop';
-export default defineComponent({
+import ShopsService from '@/services/shopsService'
+import { Shop } from '@/features/shops/Shop'
+import Vue from 'vue'
+const shopService = new ShopsService()
+export default Vue.extend({
   components: {
     ShopForm
   },
-  props: {
-    id: String
-  },
-  setup(props, { root }) {
-    let shopId = root.$router.currentRoute.params.id
-    const shopService = new ShopsService()
-    let shop = ref<Shop>({})
-
-    onMounted(async () => {
-      if (shopId) {
-        shop.value = await shopService.getById(shopId) as Shop;
-        console.log(shop.value);
-      }
-    })
-
-
-    async function editShop() {
-      await shopService.update(shopId!, shop.value)
-
-      root.$router.push({ name: 'shops' })
-
+  data() {
+    return {
+      shop: {} as Shop
     }
+  },
+  async mounted() {
+    if (this.id) {
+      this.shop = (await shopService.getById(this.id)) as Shop
+    }
+  },
+  computed: {
+    id() {
+      return this.$router.currentRoute.params.id
+    }
+  },
+  methods: {
+    async editShop() {
+      await shopService.update(this.id, this.shop)
 
-    return { shop, editShop }
+      this.$router.push({ name: 'shops' })
+    }
   }
-});
+})
 </script>
 
 <style>
