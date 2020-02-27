@@ -40,7 +40,7 @@ export default defineComponent({
     async function editShop() {
       await shopService.update(shopId!, shop.value)
 
-      root.$router.push({ name: 'shop-admin' })
+      root.$router.push({ name: 'shops' })
 
     }
 

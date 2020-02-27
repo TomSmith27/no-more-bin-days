@@ -23,7 +23,7 @@ export default defineComponent({
       }
       else {
         let currentDayOfWeek = new Date().getDay() - 1;
-        if(currentDayOfWeek == -1){
+        if (currentDayOfWeek == -1) {
           currentDayOfWeek = 6;
         }
         let openingTimes = props.shop.openingTimes[currentDayOfWeek];
@@ -35,10 +35,15 @@ export default defineComponent({
         let currentD = new Date();
         let openTime = new Date();
         let openinTimeParts = openingTimes.from.split(':');
+
         openTime.setHours(Number.parseInt(openinTimeParts[0]), Number.parseInt(openinTimeParts[1]), 0);
 
         let closeTime = new Date();
         let closeTimeParts = openingTimes.to.split(':');
+        if (closeTimeParts[0] == '00' && closeTimeParts[1] == '00') {
+          closeTimeParts[0] = '23'
+          closeTimeParts[1] = '59'
+        }
         closeTime.setHours(Number.parseInt(closeTimeParts[0]), Number.parseInt(closeTimeParts[1]), 0);
         if (currentD > openTime && currentD < closeTime) {
           return true;

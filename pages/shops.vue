@@ -2,13 +2,13 @@
   <div class="container-fluid">
     <div class="m-3 p-4 border shadow-sm">
       <h1>All Locations</h1>
-      <b-table :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" sticky-header="80vh" striped hover :items="shops" :fields="fields">
+      <b-table stacked="md" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" sticky-header="80vh" striped hover :items="shops" :fields="fields">
         <template v-slot:cell(products)="{ item }">
           <product-badges :products="item.products" />
         </template>
 
         <template v-slot:cell(openingTimes)="{ item }">
-          <div style="width : 300px">
+          <div class="opening-hours-table-button">
             <button v-b-toggle="`opening-hours-${item.id}`" class="btn btn-outline-primary btn-block">
               Opening Hours
               <b-icon-chevron-compact-down />

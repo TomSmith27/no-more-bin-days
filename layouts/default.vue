@@ -1,18 +1,21 @@
 <template>
   <div id="app">
     <b-navbar toggleable="lg" type="light" sticky class="bg-white shadow-sm">
-      <b-navbar-brand tag="h1" class="mb-0" :to="{name : 'index'}">No More Bin Days</b-navbar-brand>
+      <b-navbar-brand tag="h1" class="mb-0 d-flex align-items-center" :to="{name : 'index'}">
+        <b-icon variant="primary" font-scale="2" icon="outlet"></b-icon>No More Bin Days
+      </b-navbar-brand>
 
       <b-navbar-toggle target="null" @click="navOpen = true"></b-navbar-toggle>
       <sidebar v-model="navOpen">
+        <h5 class="text-primary">No More Bin Days</h5>
+        <hr />
         <b-navbar-nav>
           <b-nav-item-dropdown text="Products" right>
             <b-dropdown-item :to="{name : 'Products'}">A-Z</b-dropdown-item>
             <b-dropdown-item :to="{name : 'Locations'}">Categories</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="Locations" right>
-            <b-dropdown-item class="d-none d-xl-block" :to="{name : 'shops'}">A-Z</b-dropdown-item>
-            <b-dropdown-item>Categories</b-dropdown-item>
+            <b-dropdown-item :to="{name : 'shops'}">A-Z</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item :to="{name : 'Bins' }">Bins</b-nav-item>
           <b-nav-item :to="{name : 'About' }">About</b-nav-item>
@@ -70,8 +73,7 @@
           <b-dropdown-item :to="{name : 'Locations'}">Categories</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Locations" right>
-          <b-dropdown-item class="d-none d-xl-block" :to="{name : 'shops'}">A-Z</b-dropdown-item>
-          <b-dropdown-item>Categories</b-dropdown-item>
+          <b-dropdown-item :to="{name : 'shops'}">A-Z</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item :to="{name : 'Bins' }">Bins</b-nav-item>
         <b-nav-item :to="{name : 'About' }">About</b-nav-item>
