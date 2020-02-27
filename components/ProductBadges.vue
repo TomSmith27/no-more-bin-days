@@ -15,7 +15,7 @@ export default Vue.extend({
   },
   computed: {
     orderedProducts() {
-      return this.products.sort((a, b) =>
+      return [...this.products].sort((a, b) =>
         a.toLowerCase() > b.toLowerCase() ? 1 : -1
       )
     }

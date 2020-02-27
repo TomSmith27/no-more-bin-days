@@ -39,16 +39,15 @@
 
 <script lang="ts">
 import { Shop } from '@/features/shops/Shop'
-import ShopsService from '@/services/shopsService'
 import ProductBadges from '@/components/ProductBadges.vue'
 import Vue from 'vue'
-const shopService = new ShopsService()
+import { RootState } from '~/store'
 export default Vue.extend({
   components: {
     ProductBadges
   },
   async mounted() {
-    this.shops = await shopService.get()
+    this.shops = (this.$store.state as RootState).shops
   },
   data() {
     return {

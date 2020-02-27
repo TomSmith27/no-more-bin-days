@@ -1,12 +1,6 @@
 <template>
   <div>
-    <div v-if="isLoading" class="d-flex justify-content-center align-items-center" style="height : 90vh">
-      <div class="d-flex flex-column justify-content-center align-items-center">
-        <b-spinner variant="primary" style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
-        <h1 class="text-primary">Loading...</h1>
-      </div>
-    </div>
-    <div v-else class="d-flex justify-content-center flex-column align-items-center overflow-auto home" :class="{'offset-search' : filteredShops.length == 0}">
+    <div class="d-flex justify-content-center flex-column align-items-center overflow-auto home" :class="{'offset-search' : filteredShops.length == 0}">
       <div class="container-fluid">
         <div class="d-flex justify-content-center align-items-center flex-column mb-3 bg-white border shadow-sm p-2">
           <div class="d-flex justify-content-center align-items-center w-100 mb-1">
@@ -22,7 +16,7 @@
       </b-alert>
 
       <div class="container-fluid">
-        <b-alert class="text-center" variant="danger" :show="filteredShops.length == 0 && selectedProduct != null && !isLoading">Can't be recycled</b-alert>
+        <b-alert class="text-center" variant="danger" :show="filteredShops.length == 0 && selectedProduct != null">Can't be recycled</b-alert>
         <div class="shops">
           <b-card class="shadow mb-2" :key="s.id" v-for="s in filteredShops">
             <div class="d-flex align-items-center mb-2 justify-content-between">
@@ -77,14 +71,12 @@
 // @ is an alias to /src
 import ShopStatus from '@/components/ShopStatus.vue'
 import Vue from 'vue'
-import ProductsService from '@/features/products/productsService'
-import ShopsService from '../services/shopsService'
 import { Shop } from '../features/shops/Shop'
 import { Product } from '@/features/products/Product'
 import ProductBadges from '@/components/ProductBadges.vue'
+import { RootState } from '~/store'
+import { mapGetters } from 'vuex'
 
-const productService = new ProductsService()
-const shopsService = new ShopsService()
 export default Vue.extend({
   components: {
     ShopStatus,
@@ -92,42 +84,22 @@ export default Vue.extend({
   },
   data() {
     return {
-      isLoading: true,
       products: [] as Product[],
       shops: [] as Shop[],
       selectedProduct: null as String | null
     }
   },
   async mounted() {
-    this.isLoading = true
-
-    this.products = await productService.getProducts()
-    this.shops = await shopsService.get()
-    this.isLoading = false
-
+    const state = (this.$store.state as RootState)
+    this.shops = JSON.parse(JSON.stringify(state.shops));
     var routeProduct = this.$router.currentRoute.query['product']
     if (routeProduct != undefined && routeProduct != null) {
       this.selectedProduct = routeProduct as string
     }
   },
   computed: {
-    orderedProducts(): Product[] {
-      return this.products.sort((a, b) =>
-        a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-      )
-    },
-    groupedProducts(): object {
-      return this.orderedProducts.reduce((r: any, e: Product) => {
-        // get first letter of name of current element
-        const group = e.name[0]
-        // if there is no property in accumulator with this letter create it
-        if (!r[group]) r[group] = { group, products: [e] }
-        // if there is push current element to children array for that letter
-        else r[group].products.push(e)
-        // return accumulator
-        return r
-      }, {})
-    },
+    ...mapGetters(['orderedProducts']),
+
     filteredShops(): Shop[] {
       if (this.selectedProduct != null) {
         return this.shops
