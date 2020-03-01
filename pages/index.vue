@@ -174,12 +174,19 @@ export default Vue.extend({
         dist = dist * 60 * 1.1515;
         if (unit == "K") { dist = dist * 1.609344 }
         if (unit == "N") { dist = dist * 0.8684 }
+
+        if (isNaN(dist)) {
+          return 100000;
+        }
         return dist;
       }
     }
   },
   filters: {
     miles(val: number) {
+      if (val == 100000) {
+        return '';
+      }
       if (val != 0) {
         return `${Math.round((val + Number.EPSILON) * 100) / 100} miles away`
       }
