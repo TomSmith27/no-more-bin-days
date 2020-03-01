@@ -19,7 +19,7 @@
       <div class="container-fluid">
         <b-alert class="text-center" variant="danger" :show="filteredShops.length == 0 && selectedProduct != null">Can't be recycled</b-alert>
         <div class="shops">
-          <b-card :img-src="s.imageUrl" img-alt="Card image" img-left img-width="200px" img-height="200px" class="shadow mb-2" :key="s.id" v-for="s in filteredShops">
+          <b-card class="shadow shop-card mb-2 p-1" :img-src="s.imageUrl" img-alt="Card image" img-left img-width="100%" img-height="100%" :key="s.id" v-for="s in filteredShops">
             <div class="d-flex align-items-center mb-2 justify-content-between">
               <b-card-title class="mb-0">{{s.name}}</b-card-title>
 
@@ -197,6 +197,13 @@ export default Vue.extend({
 @media (min-width: 991.98px) {
   .shops {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.shop-card {
+  img {
+    max-height: 200px;
+    max-width: 200px;
   }
 }
 
