@@ -93,7 +93,8 @@ export default {
   },
   pwa: {
     manifest: {
-      name: 'NoMoreBinDays'
+      name: 'NoMoreBinDays',
+      short_name: 'NoMoreBinDays'
     }
   }
 }

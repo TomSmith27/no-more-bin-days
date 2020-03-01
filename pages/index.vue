@@ -104,8 +104,9 @@ export default Vue.extend({
     ...mapGetters(['orderedProducts', 'tips']),
 
     filteredShops(): Shop[] {
-      var x = this.currentLocation
+
       if (this.selectedProduct != null) {
+        var x = this.currentLocation
         return this.shops
           .sort((a, b) => (a.name > b.name ? 1 : -1))
           .filter((s) =>
