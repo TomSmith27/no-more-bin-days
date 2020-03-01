@@ -31,7 +31,7 @@ export default {
     link: [{
       rel: 'icon',
       type: 'image/x-icon',
-      href: '/favicon.ico?V2'
+      href: '/favicon.ico'
     }]
   },
   /*
@@ -89,6 +89,11 @@ export default {
         config.devtool = 'source-map'
       }
 
+    }
+  },
+  pwa: {
+    manifest: {
+      name: 'NoMoreBinDays'
     }
   }
 }

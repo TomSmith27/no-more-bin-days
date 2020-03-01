@@ -1,5 +1,5 @@
 <template>
-  <b-badge class="font-weight-normal" :variant="status.variant">{{status.text}}</b-badge>
+  <b-badge v-if="showStatus" class="font-weight-normal" :variant="status.variant">{{status.text}}</b-badge>
 </template>
 
 <script lang="ts">
@@ -15,6 +15,9 @@ export default Vue.extend({
     }
   },
   computed: {
+    showStatus(): boolean {
+      return !this.shop.externalOpeningHours
+    },
     isOpen(): boolean {
       if (this.shop.is247) {
         return true

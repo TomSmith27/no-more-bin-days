@@ -12,7 +12,8 @@
       </div>
       <b-alert :show="filteredShops.length == 0" variant="success" class="text-center m-2">
         <b-icon icon="info-square" class="mr-3" scale="1.5"></b-icon>
-        <strong>Top Tip</strong> : Did you know that corks can be composted?
+        <strong>Top Tip</strong>
+        : {{tip}}
       </b-alert>
 
       <div class="container-fluid">
@@ -86,21 +87,24 @@ export default Vue.extend({
     return {
       products: [] as Product[],
       shops: [] as Shop[],
-      selectedProduct: null as String | null
+      selectedProduct: null as String | null,
+      tip: ''
     }
   },
-  async mounted() {
+  async created() {
     const state = (this.$store.state as RootState)
     this.shops = JSON.parse(JSON.stringify(state.shops));
     var routeProduct = this.$router.currentRoute.query['product']
     if (routeProduct != undefined && routeProduct != null) {
       this.selectedProduct = routeProduct as string
     }
+    this.tip = this.tips[Math.floor(Math.random() * this.tips.length)];;
   },
   computed: {
-    ...mapGetters(['orderedProducts']),
+    ...mapGetters(['orderedProducts', 'tips']),
 
     filteredShops(): Shop[] {
+      var x = this.currentLocation
       if (this.selectedProduct != null) {
         return this.shops
           .sort((a, b) => (a.name > b.name ? 1 : -1))
@@ -112,11 +116,45 @@ export default Vue.extend({
           )
       }
       return []
+    },
+    currentLocation(): void {
+      if (process.client) {
+        navigator.geolocation.getCurrentPosition((result) => {
+          console.log(this.distance(result.coords.latitude, result.coords.longitude, 53.360830, -1.479210, 'M'))
+        }, (e) => {
+          console.error(e)
+        }, {
+          enableHighAccuracy: true,
+          maximumAge: 0
+        });
+      }
     }
   },
   methods: {
     mapUrl(shop: Shop) {
       return `http://maps.google.com/?q=${shop.address}`
+    },
+    distance(lat1: number, lon1: number, lat2: number, lon2: number, unit: string) {
+
+      if ((lat1 == lat2) && (lon1 == lon2)) {
+        return 0;
+      }
+      else {
+        var radlat1 = Math.PI * lat1 / 180;
+        var radlat2 = Math.PI * lat2 / 180;
+        var theta = lon1 - lon2;
+        var radtheta = Math.PI * theta / 180;
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        if (dist > 1) {
+          dist = 1;
+        }
+        dist = Math.acos(dist);
+        dist = dist * 180 / Math.PI;
+        dist = dist * 60 * 1.1515;
+        if (unit == "K") { dist = dist * 1.609344 }
+        if (unit == "N") { dist = dist * 0.8684 }
+        return dist;
+      }
     }
   }
 })

@@ -8,6 +8,14 @@ $body-color : #36454F;
 @import 'node_modules/bootstrap-vue/src/index.scss';
 @import 'node_modules/vue2-timepicker/dist/VueTimepicker.css';
 
+.logo {
+  max-width: 600px;
+}
+
+.logo-primary {
+  fill: theme-color("primary");
+}
+
 .white-space-normal {
   white-space: normal;
 }

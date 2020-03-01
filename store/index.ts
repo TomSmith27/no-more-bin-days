@@ -1,5 +1,6 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex';
-import firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import { Shop } from '~/features/shops/Shop';
 import ProductsService from '~/features/products/productsService';
 import ShopsService from '~/services/shopsService';
@@ -12,7 +13,15 @@ export const state = () => ({
 		email: ''
 	},
 	shops: [] as Shop[],
-	products: [] as Product[]
+	products: [] as Product[],
+	tips: [
+		'Check frozen veg packets - they can often by recycled with carrier bags!',
+		'Did you know you can recycle the net and tags from certain fruit with carrier bags? Check the label!',
+		'Remember to take your own containers to supermarket deli counters - lots of supermarkets are happy to use your own containers!',
+		'Did you know that corks can be composted?',
+		'Having a party? Waitrose offers free glass loan! Other supermarkets do too - check the website or ask in-store!',
+		'Browse the Products A-Z page to see all products that can be recycled'
+	] as String[]
 });
 
 export type RootState = ReturnType<typeof state>;
@@ -39,6 +48,9 @@ export const getters: GetterTree<RootState, RootState> = {
 			// return accumulator
 			return r;
 		}, {});
+	},
+	tips(state) {
+		return state.tips;
 	}
 };
 
@@ -91,69 +103,3 @@ export const actions: ActionTree<RootState, RootState> = {
 		return;
 	}
 };
-
-/* const store = () =>
-	new Vuex.Store({
-		state: {
-			user: {
-				email: ''
-			},
-			shops: [] as Shop[],
-			products: [] as Product[]
-		},
-		mutations: {
-			setUser(state, user) {
-				state.user = user;
-			},
-			setShops(state, shops: Shop[]) {
-				state.shops = shops;
-			},
-			setProducts(state, products: Product[]) {
-				state.products = products;
-			}
-		},
-		actions: {
-			LOGIN({ commit }, payload) {
-				firebase
-					.auth()
-					.signInWithEmailAndPassword(payload.email, payload.password)
-					.then((response) => {
-						if (response.user && response.user.email) {
-							window.localStorage.setItem('recycle-user', response.user.email);
-							commit('setUser', response.user);
-						}
-					})
-					.catch(function(error) {
-						// Handle Errors here.
-						alert(error);
-						// ...
-					});
-			},
-			LOGOUT({ commit }) {
-				firebase.auth().signOut();
-				window.localStorage.removeItem('recycle-user');
-				commit('setUser', {
-					email: ''
-				});
-			},
-
-			async nuxtServerInit({ commit }) {
-				let shops = await shopsService.get();
-				let products = await productService.getProducts();
-				commit('setShops', shops);
-				commit('setProducts', products);
-			}
-		},
-		modules: {},
-		getters: {
-			isLoggedIn(state) {
-				return state.user.email.length > 0;
-			},
-			user(state) {
-				return state.user;
-			}
-		}
-	});
-
-export default store;
- */

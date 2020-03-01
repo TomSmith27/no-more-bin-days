@@ -30,7 +30,6 @@ import { DocumentData } from '@firebase/firestore-types'
 import ProductsService from '@/features/products/productsService'
 import { Product } from '@/features/products/Product'
 import { useProducts } from '@/features/products/useProducts'
-import firebase from '@/firebase/firebase'
 export default defineComponent({
   components: {},
   setup(props, context) {

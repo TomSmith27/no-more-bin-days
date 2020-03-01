@@ -1,9 +1,8 @@
 <template>
-  <div class="container text-center">
-    <div class="border mt-2 shadow-sm bg-white p-5">
+  <div class="container-fluid text-center">
+    <div class="border mt-2 shadow-sm bg-white p-4">
       <div>
-        <b-icon variant="primary" font-scale="10" icon="outlet"></b-icon>
-        <h2 class="text-primary">No More Bin Days</h2>
+        <Logo />
       </div>
       <div>
         <p>
@@ -26,3 +25,14 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import Logo from '@/components/Logo.vue'
+
+import Vue from 'vue'
+export default Vue.extend({
+  components: {
+    Logo
+  }
+})
+</script>
