@@ -2,6 +2,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/app';
 import 'firebase/analytics';
 import 'firebase/firestore';
+import 'firebase/performance';
 let firebaseConfig = {};
 if (!firebase.apps.length) {
 	if (process.env.NODE_ENV == 'development') {
@@ -33,6 +34,7 @@ if (!firebase.apps.length) {
 	firebase.initializeApp(firebaseConfig);
 	if (process.client) {
 		firebase.analytics();
+		firebase.performance();
 	}
 }
 

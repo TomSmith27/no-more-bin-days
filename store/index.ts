@@ -49,6 +49,9 @@ export const getters: GetterTree<RootState, RootState> = {
 			return r;
 		}, {});
 	},
+	categoriesWithProducts(state) {
+		return groupBy(state.products, 'category').sort((a, b) => (a[0].category > b[0].category ? 1 : -1));
+	},
 	tips(state) {
 		return state.tips;
 	}
@@ -103,3 +106,21 @@ export const actions: ActionTree<RootState, RootState> = {
 		return;
 	}
 };
+
+function groupBy(collection: any[], property: string) {
+	var i = 0,
+		val,
+		index,
+		values = [],
+		result = [];
+	for (; i < collection.length; i++) {
+		val = collection[i][property];
+		index = values.indexOf(val);
+		if (index > -1) result[index].push(collection[i]);
+		else {
+			values.push(val);
+			result.push([ collection[i] ]);
+		}
+	}
+	return result;
+}

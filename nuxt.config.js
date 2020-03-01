@@ -95,6 +95,11 @@ export default {
     manifest: {
       name: 'NoMoreBinDays',
       short_name: 'NoMoreBinDays'
+    },
+    icon: {
+      iconSrc: './static/icon.png',
+      purpose: 'maskable'
+
     }
   }
 }

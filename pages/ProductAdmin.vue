@@ -38,30 +38,28 @@ export default defineComponent({
     const { orderedProducts, products } = useProducts()
 
 
-    const categories = [{
-      value: null,
-      text: 'Unknown'
-    },
-    {
-      value: 'Dental',
-      text: 'Dental'
-    },
-    {
-      value: 'Pet',
-      text: 'Pet'
-    },
-    {
-      value: 'Food',
-      text: 'Food'
-    },
-    {
-      value: 'Beauty',
-      text: 'Beauty'
-    },
-    {
-      value: 'Optical',
-      text: 'Optical'
-    }
+    const categories = [
+      { value: null, text: 'Unknown' },
+      ...[
+        'Dental',
+        'Pet',
+        'Beauty',
+        'Medical',
+        'Food',
+        'Electronics',
+        'Household',
+        'Textiles',
+        'Cleaning',
+        'Liquids',
+        'Packaging',
+        'Basics',
+        'Misc - Brita filters, furniture, CDs, pens, shoes',
+      ].sort()
+        .map(v => ({
+          value: v,
+          text: v
+        }))
+
     ]
 
 

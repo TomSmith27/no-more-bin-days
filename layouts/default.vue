@@ -26,7 +26,7 @@
         <b-navbar-nav>
           <b-nav-item-dropdown text="Products" right>
             <b-dropdown-item :to="{name : 'Products'}">A-Z</b-dropdown-item>
-            <b-dropdown-item :to="{name : 'Locations'}">Categories</b-dropdown-item>
+            <b-dropdown-item :to="{name : 'ProductCategories'}">Categories</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="Locations" right>
             <b-dropdown-item :to="{name : 'shops'}">A-Z</b-dropdown-item>
@@ -83,7 +83,7 @@
       <b-navbar-nav class="text-right d-none d-lg-flex">
         <b-nav-item-dropdown text="Products" right>
           <b-dropdown-item :to="{name : 'Products'}">A-Z</b-dropdown-item>
-          <b-dropdown-item :to="{name : 'Locations'}">Categories</b-dropdown-item>
+          <b-dropdown-item :to="{name : 'ProductCategories'}">Categories</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Locations" right>
           <b-dropdown-item :to="{name : 'shops'}">A-Z</b-dropdown-item>
