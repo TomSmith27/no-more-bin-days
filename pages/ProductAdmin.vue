@@ -53,7 +53,8 @@ export default defineComponent({
         'Liquids',
         'Packaging',
         'Basics',
-        'Misc - Brita filters, furniture, CDs, pens, shoes',
+        'Misc',
+        'Optical'
       ].sort()
         .map(v => ({
           value: v,

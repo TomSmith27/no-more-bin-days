@@ -6,7 +6,7 @@
           <div class="d-flex justify-content-center align-items-center w-100 mb-1">
             <h3>Where can I recycle</h3>
           </div>
-          <b-select class="mx-2 w-75 mb-2" v-model="selectedProduct" :options="orderedProducts" value-field="name" text-field="name"></b-select>
+          <b-select class="mx-2 w-75 mb-2" v-model="selectedProduct" :options="orderedProducts" value-field="name" text-field="name" @change="getLocation"></b-select>
           <h3>in Sheffield?</h3>
         </div>
       </div>
@@ -19,12 +19,15 @@
       <div class="container-fluid">
         <b-alert class="text-center" variant="danger" :show="filteredShops.length == 0 && selectedProduct != null">Can't be recycled</b-alert>
         <div class="shops">
-          <b-card class="shadow mb-2" :key="s.id" v-for="s in filteredShops">
+          <b-card :img-src="s.imageUrl" img-alt="Card image" img-left img-width="200px" img-height="200px" class="shadow mb-2" :key="s.id" v-for="s in filteredShops">
             <div class="d-flex align-items-center mb-2 justify-content-between">
               <b-card-title class="mb-0">{{s.name}}</b-card-title>
+
               <shop-status :shop="s"></shop-status>
             </div>
-
+            <div>
+              <small>{{getDistanceToLocation(s) | miles}}</small>
+            </div>
             <b-card-text>
               <a v-if="!s.address.includes('See website')" target="_blank" :href="mapUrl(s)">{{s.address}}</a>
               <span v-else>{{s.address}}</span>
@@ -88,7 +91,8 @@ export default Vue.extend({
       products: [] as Product[],
       shops: [] as Shop[],
       selectedProduct: null as String | null,
-      tip: ''
+      tip: '',
+      location: null as Coordinates | null
     }
   },
   async created() {
@@ -100,15 +104,24 @@ export default Vue.extend({
     }
     this.tip = this.tips[Math.floor(Math.random() * this.tips.length)];;
   },
+  async mounted() {
+    this.getLocation();
+  },
   computed: {
     ...mapGetters(['orderedProducts', 'tips']),
 
     filteredShops(): Shop[] {
-
       if (this.selectedProduct != null) {
-        var x = this.currentLocation
+        let sortFunction;
+        if (this.location != null) {
+          sortFunction = (a: Shop, b: Shop) => (this.getDistanceToLocation(a) > this.getDistanceToLocation(b) ? 1 : -1)
+        }
+        else {
+          sortFunction = (a: Shop, b: Shop) => (b.name > a.name ? 1 : -1)
+        }
+
         return this.shops
-          .sort((a, b) => (a.name > b.name ? 1 : -1))
+          .sort(sortFunction)
           .filter((s) =>
             s.products.some(
               (i: string) =>
@@ -118,25 +131,32 @@ export default Vue.extend({
       }
       return []
     },
-    currentLocation(): void {
-      if (process.client) {
+
+  },
+  methods: {
+    getLocation(): void {
+      if (process.client && this.location == null) {
         navigator.geolocation.getCurrentPosition((result) => {
-          console.log(this.distance(result.coords.latitude, result.coords.longitude, 53.360830, -1.479210, 'M'))
+          this.location = result.coords;
         }, (e) => {
           console.error(e)
         }, {
           enableHighAccuracy: true,
-          maximumAge: 0
+          maximumAge: 0,
+          timeout: 0
         });
       }
-    }
-  },
-  methods: {
+    },
+    getDistanceToLocation(shop: Shop): number {
+      if (this.location != null) {
+        return this.distance(shop.latitude, shop.longitude, this.location.latitude, this.location.longitude, 'M')
+      }
+      return 0;
+    },
     mapUrl(shop: Shop) {
       return `http://maps.google.com/?q=${shop.address}`
     },
     distance(lat1: number, lon1: number, lat2: number, lon2: number, unit: string) {
-
       if ((lat1 == lat2) && (lon1 == lon2)) {
         return 0;
       }
@@ -156,6 +176,14 @@ export default Vue.extend({
         if (unit == "N") { dist = dist * 0.8684 }
         return dist;
       }
+    }
+  },
+  filters: {
+    miles(val: number) {
+      if (val != 0) {
+        return `${Math.round((val + Number.EPSILON) * 100) / 100} miles away`
+      }
+      return ''
     }
   }
 })

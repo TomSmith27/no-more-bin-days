@@ -15,7 +15,22 @@
       <label for="inputAddress">Shop Type</label>
       <b-form-select v-model="shopType" :options="shopTypes" @input="onChange"></b-form-select>
     </div>
+    <div class="row">
+      <img :src="imageUrl" alt width="200px" height="200px" />
 
+      <b-form-group class="col" label="Image">
+        <b-form-input v-model="imageUrl" type="text" @input="onChange"></b-form-input>
+      </b-form-group>
+    </div>
+    <div class="row">
+      <b-form-group class="col" label="Longitude">
+        <b-form-input v-model="longitude" type="number" @input="onChange"></b-form-input>
+      </b-form-group>
+
+      <b-form-group class="col" label="Latitude">
+        <b-form-input v-model="latitude" type="number" @input="onChange"></b-form-input>
+      </b-form-group>
+    </div>
     <b-form-group label="Products this shop can recycle">
       <!-- prop `add-on-change` is needed to enable adding tags vie the `change` event -->
       <b-form-tags v-model="selectedProducts" size="lg" add-on-change no-outer-focus class="mb-2" @input="onChange">
@@ -98,6 +113,9 @@ export default defineComponent({
     let is247 = ref(false);
     let externalOpeningHours = ref(false);
     let externalWebsite = ref('');
+    let longitude = ref(0);
+    let latitude = ref(0);
+    let imageUrl = ref('');
     let openingTimes = ref<OpeningTimes[]>([
       { day: 'Monday', from: '', to: '', isClosed: false },
       { day: 'Tuesday', from: '', to: '', isClosed: false },
@@ -137,6 +155,15 @@ export default defineComponent({
     }
     );
 
+    function getValueOrDefault<T>(value: T, defaultValue: T) {
+      if (value == undefined || null) {
+        return defaultValue;
+      }
+      else {
+        return value
+      }
+    }
+
     watch(() => {
       name.value = props.shop.name;
       address.value = props.shop.address;
@@ -144,8 +171,11 @@ export default defineComponent({
       openingTimes.value = props.shop.openingTimes;
       shopType.value = props.shop.shopType;
       is247.value = props.shop.is247;
-      externalOpeningHours.value = props.shop.externalOpeningHours;
-      externalWebsite.value = props.shop.externalWebsite;
+      externalOpeningHours.value = getValueOrDefault(props.shop.externalOpeningHours, false);
+      externalWebsite.value = getValueOrDefault(props.shop.externalWebsite, '');
+      longitude.value = getValueOrDefault(props.shop.longitude, 0);
+      latitude.value = getValueOrDefault(props.shop.latitude, 0);
+      imageUrl.value = getValueOrDefault(props.shop.imageUrl, '');
     });
 
     const onChange = () => {
@@ -157,7 +187,10 @@ export default defineComponent({
         openingTimes: openingTimes.value,
         is247: is247.value,
         externalOpeningHours: externalOpeningHours.value,
-        externalWebsite: externalWebsite.value
+        externalWebsite: externalWebsite.value,
+        longitude: longitude.value,
+        latitude: latitude.value,
+        imageUrl: imageUrl.value
       });
     };
 
@@ -186,7 +219,10 @@ export default defineComponent({
       shopTypes,
       fillDown,
       externalOpeningHours,
-      externalWebsite
+      externalWebsite,
+      longitude,
+      latitude,
+      imageUrl
     };
   }
 });

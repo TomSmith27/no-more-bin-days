@@ -2,7 +2,7 @@
   <div class="container">
     <div class="card m-2 p-4 shadow">
       <h1>Add Shop</h1>
-      <form @submit.prevent="addShop">
+      <form novalidate @submit.prevent="addShop">
         <shop-form v-model="shop"></shop-form>
         <div class="d-flex justify-content-end">
           <button type="submit" class="btn btn-primary">Save</button>
@@ -42,7 +42,10 @@ export default defineComponent({
       ],
       is247: false,
       externalOpeningHours: false,
-      externalWebsite: ''
+      externalWebsite: '',
+      longitude: 0,
+      latitude: 0,
+      imageUrl: ''
     } as Shop)
 
 
