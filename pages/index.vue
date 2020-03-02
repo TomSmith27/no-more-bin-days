@@ -148,7 +148,6 @@ export default Vue.extend({
           {
             enableHighAccuracy: true,
             maximumAge: 0,
-            timeout: 0
           }
         )
       }
