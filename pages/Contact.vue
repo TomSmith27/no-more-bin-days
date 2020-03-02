@@ -12,7 +12,7 @@
       <hr class="border-primary" />
       <b-form @submit.prevent="onSubmit">
         <b-form-group id="input-group-1" label="Email address:" label-for="email" description="We'll never share your email with anyone else.">
-          <b-form-input id="email" v-model="email" type="email" required placeholder="Enter email"></b-form-input>
+          <b-form-input id="email" v-model="email" type="email" placeholder="Enter email"></b-form-input>
         </b-form-group>
 
         <b-form-group id="input-group-2" label="Your Name:" label-for="name">
