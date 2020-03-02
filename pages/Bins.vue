@@ -21,7 +21,25 @@
     </small>
   </div>
 </template>
-
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  name: 'Bins',
+  head() {
+    return {
+      title: 'Bins - No More Bin Days',
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: `What exactly can be recycled in our household bins? It depends where you live! Read on to find out more...`
+        }
+      ]
+    }
+  }
+})
+</script>
 <style lang="scss" scoped>
 img {
   max-width: 100%;

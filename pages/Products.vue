@@ -30,6 +30,19 @@ export default Vue.extend({
     groupedProducts(): object {
       return this.$store.getters.groupedProducts
     }
+  },
+  head() {
+    return {
+      title: 'Products - No More Bin Days',
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: `Here you can find all the products that can be recycled in Sheffield - browse the A-Z or sort by category.`
+        }
+      ]
+    }
   }
 })
 </script>

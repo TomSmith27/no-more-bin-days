@@ -33,6 +33,19 @@ import Vue from 'vue'
 export default Vue.extend({
   components: {
     Logo
+  },
+  head() {
+    return {
+      title: 'About - No More Bin Days',
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: `No More Bin Days was created to address the lack of information on where to recycle products that aren't accepted in our household bins. Search now and find out what to recycle where!`
+        }
+      ]
+    }
   }
 })
 </script>

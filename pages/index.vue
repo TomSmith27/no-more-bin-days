@@ -96,27 +96,29 @@ export default Vue.extend({
     }
   },
   async created() {
-    const state = (this.$store.state as RootState)
-    this.shops = JSON.parse(JSON.stringify(state.shops));
+    const state = this.$store.state as RootState
+    this.shops = JSON.parse(JSON.stringify(state.shops))
     var routeProduct = this.$router.currentRoute.query['product']
     if (routeProduct != undefined && routeProduct != null) {
       this.selectedProduct = routeProduct as string
     }
-    this.tip = this.tips[Math.floor(Math.random() * this.tips.length)];;
+    this.tip = this.tips[Math.floor(Math.random() * this.tips.length)]
   },
   async mounted() {
-    this.getLocation();
+    this.getLocation()
   },
   computed: {
     ...mapGetters(['orderedProducts', 'tips']),
 
     filteredShops(): Shop[] {
       if (this.selectedProduct != null) {
-        let sortFunction;
+        let sortFunction
         if (this.location != null) {
-          sortFunction = (a: Shop, b: Shop) => (this.getDistanceToLocation(a) > this.getDistanceToLocation(b) ? 1 : -1)
-        }
-        else {
+          sortFunction = (a: Shop, b: Shop) =>
+            this.getDistanceToLocation(a) > this.getDistanceToLocation(b)
+              ? 1
+              : -1
+        } else {
           sortFunction = (a: Shop, b: Shop) => (b.name > a.name ? 1 : -1)
         }
 
@@ -130,67 +132,100 @@ export default Vue.extend({
           )
       }
       return []
-    },
-
+    }
   },
   methods: {
     getLocation(): void {
       if (process.client && this.location == null) {
-        navigator.geolocation.getCurrentPosition((result) => {
-          this.location = result.coords;
-        }, (e) => {
-          console.error(e)
-        }, {
-          enableHighAccuracy: true,
-          maximumAge: 0,
-          timeout: 0
-        });
+        navigator.geolocation.getCurrentPosition(
+          (result) => {
+            this.location = result.coords
+          },
+          (e) => {
+            console.error(e)
+          },
+          {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 0
+          }
+        )
       }
     },
     getDistanceToLocation(shop: Shop): number {
       if (this.location != null) {
-        return this.distance(shop.latitude, shop.longitude, this.location.latitude, this.location.longitude, 'M')
+        return this.distance(
+          shop.latitude,
+          shop.longitude,
+          this.location.latitude,
+          this.location.longitude,
+          'M'
+        )
       }
-      return 0;
+      return 0
     },
     mapUrl(shop: Shop) {
       return `http://maps.google.com/?q=${shop.address}`
     },
-    distance(lat1: number, lon1: number, lat2: number, lon2: number, unit: string) {
-      if ((lat1 == lat2) && (lon1 == lon2)) {
-        return 0;
-      }
-      else {
-        var radlat1 = Math.PI * lat1 / 180;
-        var radlat2 = Math.PI * lat2 / 180;
-        var theta = lon1 - lon2;
-        var radtheta = Math.PI * theta / 180;
-        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    distance(
+      lat1: number,
+      lon1: number,
+      lat2: number,
+      lon2: number,
+      unit: string
+    ) {
+      if (lat1 == lat2 && lon1 == lon2) {
+        return 0
+      } else {
+        var radlat1 = (Math.PI * lat1) / 180
+        var radlat2 = (Math.PI * lat2) / 180
+        var theta = lon1 - lon2
+        var radtheta = (Math.PI * theta) / 180
+        var dist =
+          Math.sin(radlat1) * Math.sin(radlat2) +
+          Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta)
         if (dist > 1) {
-          dist = 1;
+          dist = 1
         }
-        dist = Math.acos(dist);
-        dist = dist * 180 / Math.PI;
-        dist = dist * 60 * 1.1515;
-        if (unit == "K") { dist = dist * 1.609344 }
-        if (unit == "N") { dist = dist * 0.8684 }
+        dist = Math.acos(dist)
+        dist = (dist * 180) / Math.PI
+        dist = dist * 60 * 1.1515
+        if (unit == 'K') {
+          dist = dist * 1.609344
+        }
+        if (unit == 'N') {
+          dist = dist * 0.8684
+        }
 
         if (isNaN(dist)) {
-          return 100000;
+          return 100000
         }
-        return dist;
+        return dist
       }
     }
   },
   filters: {
     miles(val: number) {
       if (val == 100000) {
-        return '';
+        return ''
       }
       if (val != 0) {
         return `${Math.round((val + Number.EPSILON) * 100) / 100} miles away`
       }
       return ''
+    }
+  },
+  head() {
+    return {
+      title: 'No more bin days',
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'My custom description'
+        }
+      ]
     }
   }
 })
