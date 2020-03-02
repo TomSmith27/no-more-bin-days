@@ -65,6 +65,19 @@ export default Vue.extend({
         { key: 'openingTimes', sortable: false }
       ]
     }
+  },
+  head() {
+    return {
+      title: 'Locations - No More Bin Days',
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: `Here you can find all the recycling locations in Sheffield - whether that's recycling bins in a car park, on the road-side, in a shop or a supermarket.`
+        }
+      ]
+    }
   }
 })
 </script>
