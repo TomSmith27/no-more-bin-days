@@ -24,13 +24,14 @@
         </svg>
         <hr />
         <b-navbar-nav>
+          <b-nav-item :to="{name : 'About' }">About</b-nav-item>
+          <b-nav-item :to="{name : 'Bins' }">Bins</b-nav-item>
+          <b-nav-item :to="{name : 'Contact' }">Contact</b-nav-item>
+          <b-nav-item :to="{name : 'DidYouKnow' }">Did you know?</b-nav-item>
+          <b-nav-item-dropdown text="Locations" right>
+            <b-dropdown-item :to="{name : 'shops'}">A-Z</b-dropdown-item>
+          </b-nav-item-dropdown>
           <b-nav-item-dropdown text="Products" right>
-            <b-nav-item :to="{name : 'About' }">About</b-nav-item>
-            <b-nav-item :to="{name : 'Bins' }">Bins</b-nav-item>
-            <b-nav-item-dropdown text="Locations" right>
-              <b-dropdown-item :to="{name : 'shops'}">A-Z</b-dropdown-item>
-            </b-nav-item-dropdown>
-            <b-nav-item :to="{name : 'DidYouKnow' }">Did you know?</b-nav-item>
             <b-dropdown-item :to="{name : 'Products'}">A-Z</b-dropdown-item>
             <b-dropdown-item :to="{name : 'ProductCategories'}">Categories</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -83,6 +84,7 @@
       <b-navbar-nav class="text-right d-none d-lg-flex">
         <b-nav-item :to="{name : 'About' }">About</b-nav-item>
         <b-nav-item :to="{name : 'Bins' }">Bins</b-nav-item>
+        <b-nav-item :to="{name : 'Contact' }">Contact</b-nav-item>
         <b-nav-item :to="{name : 'DidYouKnow' }">Did you know?</b-nav-item>
         <b-nav-item-dropdown text="Locations" right>
           <b-dropdown-item :to="{name : 'shops'}">A-Z</b-dropdown-item>
