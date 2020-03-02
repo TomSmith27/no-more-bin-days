@@ -15,11 +15,11 @@ export const state = () => ({
 	shops: [] as Shop[],
 	products: [] as Product[],
 	tips: [
-		'Check frozen veg packets - they can often by recycled with carrier bags!',
+		'Check frozen veg packets - they can often be recycled with carrier bags!',
 		'Did you know you can recycle the net and tags from certain fruit with carrier bags? Check the label!',
-		'Remember to take your own containers to supermarket deli counters - lots of supermarkets are happy to use your own containers!',
+		'Remember to take your own containers to supermarket deli counters - lots of supermarkets are happy to use them!',
 		'Did you know that corks can be composted?',
-		'Having a party? Waitrose offers free glass loan! Other supermarkets do too - check the website or ask in-store!',
+		'Having a party? Waitrose offers free glass loan! Other supermarkets do too - check their website or ask in-store!',
 		'Browse the Products A-Z page to see all products that can be recycled'
 	] as String[]
 });
