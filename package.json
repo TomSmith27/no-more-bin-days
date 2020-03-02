@@ -1,6 +1,6 @@
 {
   "name": "no-more-bin-days",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "No more bin days is an app that helps people find out where they can recycle things",
   "author": "TSmith",
   "private": true,
@@ -10,7 +10,8 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "deploy": "npm run generate && firebase deploy"
+    "deploy": "npm run generate && firebase deploy",
+    "deploy-prod": "npm run generate && firebase deploy --project recycler-99415"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
