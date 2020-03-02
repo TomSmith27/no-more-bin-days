@@ -7,7 +7,7 @@
       class="m-2 p-4 shadow"
       title-tag="h3"
       title="Contact us"
-      sub-title="We would love to hear your feedback"
+      sub-title="We would love to hear your feedback."
     >
       <hr class="border-primary" />
       <b-form @submit.prevent="onSubmit">

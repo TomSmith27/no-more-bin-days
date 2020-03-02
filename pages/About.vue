@@ -5,20 +5,9 @@
         <Logo />
       </div>
       <div>
-        <p>
-          No More Bin Days was created to address the lack of information on
-          where to recycle products that aren't accepted in our household bins.
-          The mindset behind creating No More Bin Days is to encourage any
-          action that can help our environment and our future - reducing
-          consumption, reducing waste, recycling, supporting the local
-          community, and more!
-        </p>
-        <p>
-          We're working to add more features, get more data and make No More Bin
-          Days even more useful for you. Please feel free to use the Contact Us
-          form to add suggestions of things you would like to see added in the
-          future.
-        </p>
+        <p>No More Bin Days was created to address the lack of information on where to recycle products that aren't accepted in our household bins. Many more products can be recycled than are accepted in our bins, but due to a lack of awareness of both products than can be recycled, and where to recycle them, this isn’t very well-known. Until now! No More Bin Days shows you all the products that can be recycled, and where to recycle them.</p>
+        <p>Recycling, along with reducing consumption, reducing waste and supporting our local community are all things that we as individuals can do to play our part in caring for the environment.</p>
+        <p>We're working to add more features, get more data and make No More Bin Days even more useful for you. Please feel free to use the Contact Us form to add suggestions of anything you would like to see added in the future.</p>
         <p>Thanks for your support.</p>
         <p>Poppy - Co-founder of No More Bin Days</p>
       </div>
