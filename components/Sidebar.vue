@@ -27,8 +27,8 @@ export default {
   position: fixed;
   height: 100%;
   top: 0;
-  right: -50vw;
-  width: 50vw;
+  right: -40vw;
+  width: 40vw;
   transition: right 0.5s;
 
   &-show {

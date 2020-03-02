@@ -7,7 +7,7 @@
 
       <b-navbar-toggle target="null" @click="navOpen = true"></b-navbar-toggle>
       <sidebar v-model="navOpen">
-        <svg class="logo-primary" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 1242.04 642.76" xml:space="preserve" style="width : 60%">
+        <svg class="logo-primary" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 1242.04 642.76" xml:space="preserve" style="width : 80%">
           <style />
           <path
             class="st2"
