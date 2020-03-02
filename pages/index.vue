@@ -21,10 +21,10 @@
         <div class="shops">
           <b-card class="shadow shop-card mb-2 p-1 text-center" img-top img-width="100%" img-height="100%" :key="s.id" v-for="s in filteredShops">
             <div class="d-flex align-items-center mb-2 justify-content-between">
-              <b-card-img top :src="s.imageUrl"></b-card-img>
               <b-card-title class="mb-0">{{s.name}}</b-card-title>
-
               <shop-status :shop="s"></shop-status>
+              <b-card-img v-if="s.imageUrl" top :src="s.imageUrl"></b-card-img>
+              <div v-else style="width : 100px"></div>
             </div>
             <div>
               <small>{{getDistanceToLocation(s) | miles}}</small>
