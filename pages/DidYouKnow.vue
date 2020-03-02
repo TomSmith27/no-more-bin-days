@@ -10,7 +10,7 @@
           Terracycle is a recycling scheme that recycles hard-to-recycle products.
           Terracycle have teamed up with various companies to create and run these
           recycling schemes. Many of the Terracycle recycling locations have been
-          added to NoMoreBinDays. Many of the products listed in The Recycle Guide
+          added to No More Bin Days. Many of the products listed in The Recycle Guide
           would not be able to be recycled without Terracycle - the crisp packets,
           sweetie wrappers, dental products and more are all recycled through
           Terracycle schemes.
@@ -65,7 +65,7 @@
           <a
             target="_blank"
             href="https://www.recyclenow.com/recycling-knowledge/packaging-symbols-explained?gclid=EAIaIQobChMI5ez39tP55wIVSbDtCh1NNwRxEAAYASAAEgJBhvD_BwE"
-          >Recycle Now website</a>
+          >Recycle Now website.</a>
         </p>
       </b-card>
     </div>
