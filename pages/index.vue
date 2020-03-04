@@ -2,6 +2,7 @@
   <div>
     <div class="d-flex justify-content-center flex-column align-items-center overflow-auto home" :class="{'offset-search' : filteredShops.length == 0}">
       <div class="container-fluid">
+        <b-btn variant="primary">Install me</b-btn>
         <div class="d-flex justify-content-center align-items-center flex-column mb-3 bg-white border shadow-sm p-2">
           <div class="d-flex justify-content-center align-items-center w-100 mb-1">
             <h3>Where can I recycle</h3>
@@ -147,7 +148,7 @@ export default Vue.extend({
           },
           {
             enableHighAccuracy: true,
-            maximumAge: 0,
+            maximumAge: 0
           }
         )
       }
