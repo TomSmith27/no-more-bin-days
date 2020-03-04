@@ -21,7 +21,8 @@ export const state = () => ({
 		'Did you know that corks can be composted?',
 		'Having a party? Waitrose offers free glass loan! Other supermarkets do too - check their website or ask in-store!',
 		'Browse the Products A-Z page to see all products that can be recycled'
-	] as String[]
+	] as String[],
+	installPrompt: null as Event | null
 });
 
 export type RootState = ReturnType<typeof state>;
@@ -66,6 +67,9 @@ export const mutations: MutationTree<RootState> = {
 	},
 	setProducts(state, products: Product[]) {
 		state.products = products;
+	},
+	setInstallPrompt(state, prompt: Event) {
+		state.installPrompt = prompt;
 	}
 };
 
