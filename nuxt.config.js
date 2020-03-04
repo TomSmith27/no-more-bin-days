@@ -9,8 +9,7 @@ export default {
    */
   head: {
     title: process.env.npm_package_name || '',
-    meta: [
-      {
+    meta: [{
         charset: 'utf-8'
       },
       {
@@ -23,20 +22,16 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    script: [
-      {
-        async: true,
-        'data-ad-client': 'ca-pub-7900356772974418',
-        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
-      }
-    ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      }
-    ]
+    script: [{
+      async: true,
+      'data-ad-client': 'ca-pub-7900356772974418',
+      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+    }],
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }]
   },
   /*
    ** Customize the progress-bar color
@@ -103,11 +98,5 @@ export default {
       iconSrc: './static/icon.png',
       purpose: 'maskable'
     },
-    workbox: {
-      dev: true,
-      config: {
-        debug: true
-      }
-    }
   }
 }

@@ -1,8 +1,10 @@
 <template>
   <div>
+    <div class="d-flex justify-content-center align-items-center pt-5" v-if="$store.state.installPrompt != null">
+      <b-btn variant="outline-primary" @click="install">Install App here!</b-btn>
+    </div>
     <div class="d-flex justify-content-center flex-column align-items-center overflow-auto home" :class="{'offset-search' : filteredShops.length == 0}">
       <div class="container-fluid">
-        <b-btn variant="primary">Install me</b-btn>
         <div class="d-flex justify-content-center align-items-center flex-column mb-3 bg-white border shadow-sm p-2">
           <div class="d-flex justify-content-center align-items-center w-100 mb-1">
             <h3>Where can I recycle</h3>
@@ -137,6 +139,20 @@ export default Vue.extend({
     }
   },
   methods: {
+    install() {
+      const deferredPrompt = this.$store.state.installPrompt as any
+      console.log('install')
+      // Show the install prompt
+      deferredPrompt.prompt()
+      // Wait for the user to respond to the prompt
+      deferredPrompt.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt')
+        } else {
+          console.log('User dismissed the install prompt')
+        }
+      })
+    },
     getLocation(): void {
       if (process.client && this.location == null) {
         navigator.geolocation.getCurrentPosition(
@@ -255,6 +271,6 @@ export default Vue.extend({
   margin-top: 5vh;
 }
 .offset-search {
-  margin-top: 25vh;
+  margin-top: 15vh;
 }
 </style>

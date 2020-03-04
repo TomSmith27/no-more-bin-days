@@ -12,7 +12,6 @@
         </nuxt-link>
         <hr />
         <b-navbar-nav>
-          <button @click="install">Install</button>
           <b-nav-item :to="{ name: 'About' }">About</b-nav-item>
           <b-nav-item :to="{ name: 'Bins' }">Bins</b-nav-item>
           <b-nav-item :to="{ name: 'Contact' }">Contact</b-nav-item>
@@ -158,11 +157,10 @@ export default Vue.extend({
         email: '',
         password: ''
       },
-      deferredPrompt: {} as Event
     }
   },
   watch: {
-    $route: function() {
+    $route: function () {
       this.navOpen = false
     }
   },
@@ -177,29 +175,17 @@ export default Vue.extend({
     }
   },
   mounted() {
-    console.log('test2')
     window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('before prompt')
       // Prevent the mini-infobar from appearing on mobile
       e.preventDefault()
       // Stash the event so it can be triggered later.
-      this.deferredPrompt = e
+
+      this.$store.commit('setInstallPrompt', e)
       // Update UI notify the user they can install the PWA
     })
   },
   methods: {
-    install() {
-      const deferredPrompt = this.deferredPrompt as any
-      // Show the install prompt
-      deferredPrompt.prompt()
-      // Wait for the user to respond to the prompt
-      deferredPrompt.userChoice.then((choiceResult: any) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt')
-        } else {
-          console.log('User dismissed the install prompt')
-        }
-      })
-    },
     logout() {
       this.$store.dispatch('LOGOUT')
       this.$router.push({ name: 'Index' })
