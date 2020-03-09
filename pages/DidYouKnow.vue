@@ -29,43 +29,68 @@
         <hr class="border-primary" />
         <p>Below you can find three common labels you may find on packaging - have a read and find out what the labels actually mean!</p>
         <hr class="border-primary" />
+        <p>
+          <b>Widely Recycled</b>
+        </p>
+        <p>This label is applied to packaging that is collected by 75% or more of local authorities across the UK.</p>
         <div class="row justify-content-center">
           <img src="../static/didyouknow/1.PNG" alt />
         </div>
         <hr class="border-primary" />
+        <p>
+          <b>Check Locally</b>
+        </p>
+        <p>This label is applied to packaging that is collected by 20-75% of local authorities across the UK.</p>
         <div class="row justify-content-center">
           <img src="../static/didyouknow/3.PNG" alt />
         </div>
         <hr class="border-primary" />
         <p>Just looking at the symbol on the 'Check Locally' label you could easily think that this packaging cannot be recycled. But think again! Actually your local authority may well collect it and if not, you may be able to recycle it at another location - use the Search function on the homepage to see if your packaging can be recycled somewhere.</p>
         <hr class="border-primary" />
+        <p>
+          <b>Not Yet Recycled</b>
+        </p>
+        <p>This label is applied to packaging when less than 20% of local authorities collect it across the UK, for example crisp packets.</p>
         <div class="row justify-content-center my-2">
           <img src="../static/didyouknow/4.PNG" alt />
         </div>
         <hr class="border-primary" />
-        <h4 class="pt-5">Here are some other labels you may find interesting:</h4>
+
+        <h4 class>Here are some other labels you may find interesting:</h4>
         <p>This symbol could easily trick you into thinking the packaging is recyclable!</p>
         <hr class="border-primary" />
+        <p>
+          <b>The Green Dot</b>
+        </p>
+        <p>The Green Dot does not necessarily mean that the packaging is recyclable, will be recycled or has been recycled. It is a symbol used on packaging in some European countries and signifies that the producer has made a financial contribution towards the recovery and recycling of packaging in Europe.</p>
         <div class="row justify-content-center">
           <img src="../static/didyouknow/5.PNG" alt />
         </div>
         <hr class="border-primary" />
+        <p>
+          <b>Mobius Loop</b>
+        </p>
+        <p>This indicates that an object is capable of being recycled, not that the object has been recycled or will be accepted in all recycling collection systems. Sometimes this symbol is used with a percentage figure in the middle to explain that the packaging contains x% of recycled material.</p>
         <div class="row justify-content-center">
           <img src="../static/didyouknow/6.PNG" alt />
         </div>
         <hr class="border-primary" />
         <p>There's actually loads of packaging that can be recycled at big supermarkets that few people know about! When you take your carrier bags there to be recycled you can also take all the below listed items too. That's a lot of plastic!</p>
         <hr class="border-primary" />
+        <p>
+          <b>Recycle with Bags at Larger Stores: Check Locally for Kerbside</b>
+        </p>
+        <p>Some plastic films can be recycled at supermarket's carrier bag collection points. Look out for the 'Recycle with carrier bags at larger stores' message on your breakfast cereal, toilet and kitchen roll wraps, bread bag, grocery produce, multipack shrink wrap and newspaper and magazine wraps.</p>
         <div class="row justify-content-center">
           <img src="../static/didyouknow/2.PNG" alt />
         </div>
         <hr class="border-primary" />
         <p>
-          To find out more about recycling symbols and what they actually mean, see the
+          This information came from the Recycle Now website.
           <a
             target="_blank"
             href="https://www.recyclenow.com/recycling-knowledge/packaging-symbols-explained?gclid=EAIaIQobChMI5ez39tP55wIVSbDtCh1NNwRxEAAYASAAEgJBhvD_BwE"
-          >Recycle Now website.</a>
+          >Click to find out more about recycling symbols.</a>
         </p>
       </b-card>
     </div>
