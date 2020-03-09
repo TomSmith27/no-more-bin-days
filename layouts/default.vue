@@ -23,7 +23,6 @@
             <b-dropdown-item :to="{ name: 'Products' }">A-Z</b-dropdown-item>
             <b-dropdown-item :to="{ name: 'ProductCategories' }">Categories</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item href="https://www.instagram.com/accounts/login/?next=%2Fno_more_bin_days%2F&source=follow">Follow us on instagram</b-nav-item>
           <client-only placeholder="Loading...">
             <b-nav-item-dropdown v-if="isLoggedIn" text="Admin" right>
               <b-dropdown-item :to="{ name: 'ProductAdmin' }">Product Admin</b-dropdown-item>
