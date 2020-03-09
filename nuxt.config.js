@@ -96,7 +96,7 @@ export default {
     },
     icon: {
       iconSrc: './static/icon.png',
-      purpose: 'maskable'
+      purpose: 'maskable any'
     },
   }
 }
