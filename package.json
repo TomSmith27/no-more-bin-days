@@ -1,40 +1,40 @@
 {
-  "name": "no-more-bin-days",
-  "version": "1.0.21",
-  "description": "No more bin days is an app that helps people find out where they can recycle things",
-  "author": "TSmith",
-  "private": true,
-  "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "deploy": "npm run generate && firebase deploy",
-    "deploy-prod": "npm run generate && firebase deploy --project recycler-99415"
-  },
-  "dependencies": {
-    "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/dotenv": "^1.4.0",
-    "@nuxtjs/pwa": "^3.0.0-0",
-    "@vue/composition-api": "^0.4.0",
-    "bootstrap": "^4.1.3",
-    "bootstrap-vue": "^2.0.0",
-    "firebase": "^7.9.1",
-    "nuxt": "^2.0.0",
-    "vue2-timepicker": "^1.0.8"
-  },
-  "devDependencies": {
-    "@nuxt/typescript-build": "^0.5.7",
-    "@nuxtjs/eslint-config": "^2.0.0",
-    "@nuxtjs/eslint-module": "^1.0.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^6.1.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-nuxt": ">=0.4.2",
-    "eslint-plugin-prettier": "^3.1.2",
-    "node-sass": "^4.13.1",
-    "prettier": "^1.19.1",
-    "sass-loader": "^8.0.2"
-  }
+	"name": "no-more-bin-days",
+	"version": "1.0.22",
+	"description": "No More Bin Days was created to address the lack of information on where to recycle products that aren't accepted in our household bins. Search now and find out what to recycle where!",
+	"author": "TSmith",
+	"private": true,
+	"scripts": {
+		"dev": "nuxt",
+		"build": "nuxt build",
+		"start": "nuxt start",
+		"generate": "nuxt generate",
+		"lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+		"deploy": "npm run generate && firebase deploy",
+		"deploy-prod": "npm run generate && firebase deploy --project recycler-99415"
+	},
+	"dependencies": {
+		"@nuxtjs/axios": "^5.3.6",
+		"@nuxtjs/dotenv": "^1.4.0",
+		"@nuxtjs/pwa": "^3.0.0-0",
+		"@vue/composition-api": "^0.4.0",
+		"bootstrap": "^4.1.3",
+		"bootstrap-vue": "^2.0.0",
+		"firebase": "^7.9.1",
+		"nuxt": "^2.0.0",
+		"vue2-timepicker": "^1.0.8"
+	},
+	"devDependencies": {
+		"@nuxt/typescript-build": "^0.5.7",
+		"@nuxtjs/eslint-config": "^2.0.0",
+		"@nuxtjs/eslint-module": "^1.0.0",
+		"babel-eslint": "^10.0.1",
+		"eslint": "^6.1.0",
+		"eslint-config-prettier": "^6.10.0",
+		"eslint-plugin-nuxt": ">=0.4.2",
+		"eslint-plugin-prettier": "^3.1.2",
+		"node-sass": "^4.13.1",
+		"prettier": "^1.19.1",
+		"sass-loader": "^8.0.2"
+	}
 }

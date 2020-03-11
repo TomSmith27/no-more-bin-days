@@ -8,7 +8,7 @@
             <li v-for="group in categoriesWithProducts" :key="group.group" class="list-group-item">
               <h3 class="text-primary">{{ group[0].category }}</h3>
               <ul>
-                <div v-for="product in group" :key="product.id">
+                <div v-for="product in group.slice().sort((a, b) => a.name > b.name ? 1 : -1)" :key="product.id">
                   <b-badge class="big-badge white-space-normal" :to="{ name: 'index', query: { product: product.name } }" variant="primary">{{ product.name }}</b-badge>
                 </div>
               </ul>
