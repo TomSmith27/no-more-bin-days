@@ -9,7 +9,7 @@
           <div class="d-flex justify-content-center align-items-center w-100 mb-1">
             <h3>Where can I recycle</h3>
           </div>
-          <b-select class="mx-2 w-75 mb-2" v-model="selectedProduct" :options="orderedProducts" value-field="name" text-field="name" @change="getLocation"></b-select>
+          <b-select class="mx-2 w-75 mb-2" v-model="selectedProduct" :options="orderedProducts" value-field="name" text-field="name" @change="productChange"></b-select>
           <h3>in Sheffield?</h3>
         </div>
       </div>
@@ -84,6 +84,8 @@ import { Product } from '@/features/products/Product'
 import ProductBadges from '@/components/ProductBadges.vue'
 import { RootState } from '~/store'
 import { mapGetters } from 'vuex'
+import { analytics } from 'firebase'
+
 
 export default Vue.extend({
   components: {
@@ -152,6 +154,10 @@ export default Vue.extend({
           console.log('User dismissed the install prompt')
         }
       })
+    },
+    productChange() {
+      analytics().logEvent('product_selected', { value: this.selectedProduct });
+      this.getLocation();
     },
     getLocation(): void {
       if (process.client && this.location == null) {
