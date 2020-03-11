@@ -9,7 +9,8 @@ export default {
    */
   head: {
     title: process.env.npm_package_name || '',
-    meta: [{
+    meta: [
+      {
         charset: 'utf-8'
       },
       {
@@ -22,16 +23,26 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    script: [{
-      async: true,
-      'data-ad-client': 'ca-pub-7900356772974418',
-      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
-    }],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico'
-    }]
+    script: [
+      {
+        async: true,
+        'data-ad-client': 'ca-pub-7900356772974418',
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+      },
+      {
+        src: 'https://unpkg.com/core-js-bundle@3.0.1/minified.js'
+      },
+      {
+        src: 'https://cdn.polyfill.io/v2/polyfill.js?features=fetch'
+      }
+    ],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -97,6 +108,6 @@ export default {
     icon: {
       iconSrc: './static/icon.png',
       purpose: 'maskable'
-    },
+    }
   }
 }
