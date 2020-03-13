@@ -35,7 +35,7 @@ export const getters: GetterTree<RootState, RootState> = {
 		return state.user;
 	},
 	orderedProducts(state): Product[] {
-		return state.products.slice().sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
+		return state.products.slice().sort((a, b) => (b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1));
 	},
 	groupedProducts(state, { orderedProducts }): object {
 		return orderedProducts.reduce((r: any, e: Product) => {
