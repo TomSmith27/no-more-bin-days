@@ -6,7 +6,14 @@
           <button type="button" class="btn btn-primary btn-block">Add Shop</button>
         </router-link>
       </div>
-      <b-table :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" sticky-header="80vh" bordered striped hover :items="shops" :fields="fields">
+      <b-form-input class="mb-2" v-model="nameFilter" placeholder="Search Shops"></b-form-input>
+      <b-table :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" sticky-header="80vh" bordered striped hover :items="filteredShops" :fields="fields">
+        <template v-slot:cell(name)="{ item }">
+          <div>
+            <img :src="item.imageUrl" class="img" />
+            {{item.name}}
+          </div>
+        </template>
         <template v-slot:cell(products)="{ item }">
           <div>
             <b-badge v-for="product in item.products" :key="product" variant="primary" class="ml-1">{{ product }}</b-badge>
@@ -40,11 +47,12 @@ export default Vue.extend({
     return {
       shops: [] as Shop[],
       sortBy: 'name',
-      sortDesc: false
+      sortDesc: false,
+      nameFilter: ''
     }
   },
   computed: {
-    fields() {
+    fields(): Array<any> {
       return [
         { key: 'name', sortable: true },
         { key: 'address', sortable: true },
@@ -53,6 +61,12 @@ export default Vue.extend({
         'edit',
         'delete'
       ]
+    },
+    filteredShops(): Array<Shop> {
+      if (this.nameFilter.length > 0) {
+        return this.shops.filter(s => s.name.toLowerCase().includes(this.nameFilter))
+      }
+      return this.shops;
     }
   },
   methods: {
@@ -63,4 +77,9 @@ export default Vue.extend({
   }
 })
 </script>
-<style></style>
+<style>
+.img {
+  max-height: 100px;
+  max-width: 100px;
+}
+</style>
