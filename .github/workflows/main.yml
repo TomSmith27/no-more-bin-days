@@ -23,3 +23,11 @@ jobs:
         args: deploy --project recycler-99415
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+     - name: "Automated Version Bump"
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          tag-prefix: ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "cat package.json"
+        run: cat ./package.json

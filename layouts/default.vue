@@ -15,7 +15,7 @@
           <b-nav-item :to="{ name: 'About' }">About</b-nav-item>
           <b-nav-item :to="{ name: 'Bins' }">Bins</b-nav-item>
           <b-nav-item :to="{ name: 'Contact' }">Contact</b-nav-item>
-          <b-nav-item :to="{ name: 'DidYouKnow' }">Did you know?</b-nav-item>
+          <b-nav-item :to="{ name: 'DidYouKnow' }"> <span class="nav-link badge badge-danger text-white px-1 mr-1">New!</span>Did you know?</b-nav-item>
           <b-nav-item-dropdown text="Locations" right>
             <b-dropdown-item :to="{ name: 'shops' }">A-Z</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -69,7 +69,9 @@
         <b-nav-item :to="{ name: 'About' }">About</b-nav-item>
         <b-nav-item :to="{ name: 'Bins' }">Bins</b-nav-item>
         <b-nav-item :to="{ name: 'Contact' }">Contact</b-nav-item>
-        <b-nav-item :to="{ name: 'DidYouKnow' }">Did you know?</b-nav-item>
+        <b-nav-item :to="{ name: 'DidYouKnow' }"
+          >Did you know? <sup><span class="nav-link badge badge-danger text-white">New!</span></sup></b-nav-item
+        >
         <b-nav-item-dropdown text="Locations" right>
           <b-dropdown-item :to="{ name: 'shops' }">A-Z</b-dropdown-item>
         </b-nav-item-dropdown>
@@ -135,12 +137,12 @@
             xmlns:xlink="http://www.w3.org/1999/xlink"
           >
             <style type="text/css">
-  .st0 {
-    fill: url(#SVGID_1_);
-  }
-  .st1 {
-    fill: #ffffff;
-  }
+              .st0 {
+                fill: url(#SVGID_1_);
+              }
+              .st1 {
+                fill: #ffffff;
+              }
             </style>
             <g id="Edges" />
             <g id="Background">
@@ -205,11 +207,11 @@ export default Vue.extend({
       form: {
         email: '',
         password: ''
-      },
+      }
     }
   },
   watch: {
-    $route: function () {
+    $route: function() {
       this.navOpen = false
     }
   },

@@ -1,8 +1,10 @@
-$theme-colors: ("primary": #41b883,
-  "success" : #09ff00);
+$theme-colors: (
+  'primary': #41b883,
+  'success': #09ff00,
+  'danger': #ea0319
+);
 
-
-$body-color : #36454F;
+$body-color: #36454f;
 
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
@@ -13,26 +15,23 @@ $body-color : #36454F;
 }
 
 .logo-primary {
-  fill: theme-color("primary");
+  fill: theme-color('primary');
 }
 
 .white-space-normal {
   white-space: normal;
 }
 
-
 .big-badge {
-  padding: $spacer * .5;
-  margin-top: $spacer * .5;
-  margin-bottom: $spacer * .5;
+  padding: $spacer * 0.5;
+  margin-top: $spacer * 0.5;
+  margin-bottom: $spacer * 0.5;
 }
-
 
 @include media-breakpoint-up(md) {
   .opening-hours-table-button {
     width: 300px;
   }
-
 
   .thanks {
     background-color: white;
