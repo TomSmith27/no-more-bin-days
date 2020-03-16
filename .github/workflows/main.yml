@@ -3,31 +3,30 @@ name: Deploy-Live
 on:
   push:
     branches:
-    - master
-    - release/*
+      - master
+      - release/*
 
 jobs:
   firebase-deploy:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
-      with:
-        node-version: '10.x'
-    - run: npm install
-    - run: npm run generate
-    - uses: w9jds/firebase-action@master
-      with:
-        args: deploy --project recycler-99415
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-     - name: "Automated Version Bump"
-        uses: "phips28/gh-action-bump-version@master"
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - run: npm run generate
+      - uses: w9jds/firebase-action@master
+        with:
+          args: deploy --project recycler-99415
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: 'Automated Version Bump'
+        uses: 'phips28/gh-action-bump-version@master'
         with:
           tag-prefix: ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "cat package.json"
+      - name: 'cat package.json'
         run: cat ./package.json
