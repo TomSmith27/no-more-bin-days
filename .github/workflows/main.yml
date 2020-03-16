@@ -5,15 +5,18 @@ on:
     branches:
       - master
       - release/*
+    paths-ignore:
+      - 'package.json'
+      - 'CHANGELOG.md'
 
 jobs:
   firebase-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@master
-      - name: 'cat package.json'
-        run: cat ./package.json
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN_ACTION }}
       - uses: actions/setup-node@master
         with:
           node-version: '10.x'
@@ -24,11 +27,11 @@ jobs:
           args: deploy --project recycler-99415
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - name: 'Automated Version Bump'
-        uses: 'phips28/gh-action-bump-version@master'
+      - name: Bump version and push tag
+        uses: TriPSs/conventional-changelog-action@master
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN_ACTION }}
+          git-message: 'chore(release): {version}'
+          preset: 'angular'
           tag-prefix: ''
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 'cat package.json'
-        run: cat ./package.json
+          output-file: 'CHANGELOG.md'
