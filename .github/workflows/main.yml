@@ -14,18 +14,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: "actions/checkout@v1"
         with:
-          token: ${{ secrets.GITHUB_TOKEN_ACTION }}
-      - name: Bump version and push tag
-        uses: TriPSs/conventional-changelog-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN_ACTION }}
-          git-message: 'chore(release): {version}'
-          preset: 'angular'
-          tag-prefix: ''
-          output-file: 'CHANGELOG.md'
-      - uses: actions/checkout@master
+          ref: ${{ github.ref }}
+      - name: 'cat package.json'
+        run: cat ./package.json
       - uses: actions/setup-node@master
         with:
           node-version: '10.x'
@@ -36,11 +29,11 @@ jobs:
           args: deploy --project recycler-99415
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - name: Bump version and push tag
-        uses: TriPSs/conventional-changelog-action@master
+      - name: 'Automated Version Bump'
+        uses: 'phips28/gh-action-bump-version@master'
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN_ACTION }}
-          git-message: 'chore(release): {version}'
-          preset: 'angular'
           tag-prefix: ''
-          output-file: 'CHANGELOG.md'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'cat package.json'
+        run: cat ./package.json
