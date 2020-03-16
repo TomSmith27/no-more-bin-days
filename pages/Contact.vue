@@ -31,8 +31,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import FeedbackService from '@/services/feedbackService';
-const feedbackService = new FeedbackService();
+import FeedbackService from '@/services/feedbackService'
+const feedbackService = new FeedbackService()
 export default Vue.extend({
   name: 'Contact',
   data() {
@@ -48,9 +48,10 @@ export default Vue.extend({
         await feedbackService.add({
           name: this.name,
           email: this.email,
-          message: this.message
+          message: this.message,
+          date: new Date(Date.now()).toLocaleString()
         })
-        //@ts-ignore 
+        //@ts-ignore
         this.$bvToast.toast(`Thank you for your feedback`, {
           title: `Thank you for your feedback`,
           solid: true,
@@ -60,19 +61,21 @@ export default Vue.extend({
         setTimeout(() => {
           this.$router.push({ name: 'index' })
         }, 2000)
-      }
-      catch (e) {
+      } catch (e) {
         console.log(e)
-        //@ts-ignore 
-        this.$bvToast.toast(`Sorry you're feedback could not be submitted at this time`, {
-          title: 'Please try again later',
-          solid: true,
-          variant: 'danger'
-        })
+        //@ts-ignore
+        this.$bvToast.toast(
+          `Sorry you're feedback could not be submitted at this time`,
+          {
+            title: 'Please try again later',
+            solid: true,
+            variant: 'danger'
+          }
+        )
       }
     }
   }
-});
+})
 </script>
 
 <style>
